@@ -25,6 +25,7 @@ class Player(db.Model):
     playername = db.Column(db.String(120), index=True, unique=True)
     position = db.Column(db.String(5), index=True, unique=False)
     value = db.Column(db.Integer, default=0)
+    ownership_group = db.Column(db.Integer, default=0)
 
     def __repr__(self):
         return '<Player {}>'.format(self.playername)

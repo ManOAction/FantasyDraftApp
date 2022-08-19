@@ -10,14 +10,30 @@
         <div class="subheading mb-5">
             Easily The Best Fantasy Draft App That Pop Acta's Ever Made
             <!-- <a href="mailto:name@email.com">name@email.com</a> -->
+        </div>        
+        <div 
+            class="subheading mb-2"> <b>Undrafted Players</b>
         </div>
-        <br /><br />
-        {% for player in players %}
+        {% for player in UndraftedPlayers %}
+
+        <p class="lead mb-1">
+            <a href="{{ '/updateplayerownership/%i' %player.id }}">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a>
+        </p>
     
-        <p class="lead mb-5">{{ player.playername }} playing <b>{{ player.position }}</b> predicted at <i>{{ player.value }}</i></p>
+        <!-- <p class="lead mb-1">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</p> -->
     
         {% endfor %}        
-        
+        <br /><br />
+        <div class="subheading mb-2"> <b>Drafted Players</b>
+
+        </div>
+        {% for player in DraftedPlayers %}
+    
+        <p class="lead mb-1">
+            <a href="{{ '/updateplayerownership/%i' %player.id }}">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a>
+        </p>
+    
+        {% endfor %}
     </div>
 </section>    
 {% endblock %}
