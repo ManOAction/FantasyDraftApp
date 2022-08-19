@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="resume-section" id="about">
+    <div class="resume-section-content">
+        <h1 class="mb-0">
+            Jacob's
+            <span class="text-primary">Pop Acta Draft App</span>
+        </h1>
+        <div class="subheading mb-5">
+            Easily The Best Fantasy Draft App That Pop Acta's Ever Made
+            <!-- <a href="mailto:name@email.com">name@email.com</a> -->
+        </div>
+        <br /><br />
+        {% for player in players %}
+    
+        <p class="lead mb-5">{{ player.playername }} playing <b>{{ player.position }}</b> predicted at <i>{{ player.value }}</i></p>
+    
+        {% endfor %}        
+        
+    </div>
+</section>    
+{% endblock %}

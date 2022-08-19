@@ -1,8 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hi, {{ user.username }}!</h1>
-    {% for post in posts %}
-    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
-    {% endfor %}
+
+<!-- About-->
+<section class="resume-section" id="about">
+    <div class="resume-section-content">
+        <h1 class="mb-0">
+            Jacob's
+            <span class="text-primary">Pop Acta Draft App</span>
+        </h1>
+        <div class="subheading mb-5">
+            Easily The Best Fantasy Draft App That Pop Acta's Ever Made
+            <!-- <a href="mailto:name@email.com">name@email.com</a> -->
+        </div>
+        <p class="lead mb-5">Your Excel skills can't save you now.</p>     
+        <div class="social-icons">
+            <a class="social-icon" href="#!"><i class="fab fa-linkedin-in"></i></a>
+            <a class="social-icon" href="#!"><i class="fab fa-github"></i></a>
+            <a class="social-icon" href="#!"><i class="fab fa-twitter"></i></a>
+            <a class="social-icon" href="#!"><i class="fab fa-facebook-f"></i></a>
+        </div>                                
+    </div>
+</section>
+<hr class="m-0" />         
+
 {% endblock %}
