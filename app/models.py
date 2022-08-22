@@ -20,12 +20,36 @@ class Post(db.Model):
     def __repr__(self):
         return '<Post {}>'.format(self.body)
 
+class DraftStatus(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    CurrentTeam = db.Column(db.Integer, default=1)
+    CurrentDraftPick = db.Column(db.Integer, default=1)
+    DraftDirection = db.Column(db.Integer, default=1)
+    TotalQB = db.Column(db.Integer, default=1)
+    TotalRB = db.Column(db.Integer, default=2)
+    TotalWR = db.Column(db.Integer, default=2)
+    TotalTE = db.Column(db.Integer, default=1)
+    TotalFLEX = db.Column(db.Integer, default=2)
+    TotalDST = db.Column(db.Integer, default=1)
+    TotalTeams = db.Column(db.Integer, default=12)
+    
+    def __repr__(self):
+        return '<Currently Drafting {}>'.format(self.CurrentTeam)        
+
 class Player(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     playername = db.Column(db.String(120), index=True, unique=True)
     position = db.Column(db.String(5), index=True, unique=False)
-    value = db.Column(db.Integer, default=0)
+    tier = db.Column(db.String(5), index=True, unique=False)
+    pointprojection = db.Column(db.Integer, default=0)
+    vorpatdraft = db.Column(db.Integer, default=0)
     ownership_group = db.Column(db.Integer, default=0)
+
+    def Vorp(self):
+        
+        return self.id
+        # return Player.query.filter(Player.id == PlayerID).first()
+        # Player.CalcVorp(id)
 
     def __repr__(self):
         return '<Player {}>'.format(self.playername)

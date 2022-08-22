@@ -8,28 +8,31 @@
             <span class="text-primary">Pop Acta Draft App</span>        
         </h1>                    
             <div class="subheading mb-5">
-                Easily The Best Fantasy Draft App That Pop Acta's Ever Made
+                Easily The Best Fantasy Draft App That Pop Acta's Ever Made<br />
+                Currently Drafting is Team : {{ DraftStatus.CurrentTeam }} <a href="{{ '/resetdraft' }}">  Current Draft Direction is {{ DraftStatus.DraftDirection }}<br />
+                <b>Reset Draft</b></a><br />
+                
                 <!-- <a href="mailto:name@email.com">name@email.com</a> -->
             </div>        
             <div class="player-lists">
                 
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="player-text-1">
                             <b>Undrafted Players</b><br />
                             {% for player in UndraftedPlayers %}
                             
-                            <a href="{{ '/updateplayerownership/%i' %player.id }}">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
+                            <a href="{{ '/updateplayerownership/%i' %player.id }}">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points - <i>{{ player.Vorp() }}</i> VORP</a><br />
                                         
                             {% endfor %}  
                         </div>
                         
                     </div>            
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="player-text-1"> 
                             <b>Drafted Players</b><br />
                             {% for player in DraftedPlayers %}
                             
-                            <a href="{{ '/updateplayerownership/%i' %player.id }}">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
+                            <a href="{{ '/updateplayerownership/%i' %player.id }}">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.Vorp() }}</i> VORP</a><br />
                                         
                             {% endfor %}  
                         </div>
@@ -44,9 +47,9 @@
                 <div class="col-1">
                     <div class="player-text-2">
                         <b>Team 1</b><br />
-                        {% for player in UndraftedPlayers %}
+                        {% for player in PlayersTeam1 %}
                         
-                        <a href="{{ '/updateplayerownership/%i' %player.id }}">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
+                        {{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
                                     
                         {% endfor %}  
                     </div>
@@ -55,9 +58,9 @@
                 <div class="col-1">
                     <div class="player-text-2"> 
                         <b>Team 2</b><br />
-                        {% for player in DraftedPlayers %}
+                        {% for player in PlayersTeam2 %}
                         
-                        <a href="{{ '/updateplayerownership/%i' %player.id }}">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
+                        {{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
                                     
                         {% endfor %}  
                     </div>
@@ -66,9 +69,9 @@
                 <div class="col-1">
                     <div class="player-text-2">
                         <b>Team 3</b><br />
-                        {% for player in UndraftedPlayers %}
+                        {% for player in PlayersTeam3 %}
                         
-                        <a href="{{ '/updateplayerownership/%i' %player.id }}">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
+                        {{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
                                     
                         {% endfor %}  
                     </div>
@@ -77,9 +80,9 @@
                 <div class="col-1">
                     <div class="player-text-2"> 
                         <b>Team 4</b><br />
-                        {% for player in DraftedPlayers %}
+                        {% for player in PlayersTeam4 %}
                         
-                        <a href="{{ '/updateplayerownership/%i' %player.id }}">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
+                        {{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
                                     
                         {% endfor %}  
                     </div>
