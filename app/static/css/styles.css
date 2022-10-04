@@ -740,7 +740,7 @@ progress {
 
 .col-2 {
   flex: 0 0 auto;
-  width: 16.66666667%;
+  width: 25%;
 }
 
 .col-3 {
@@ -11421,7 +11421,7 @@ p.lead {
   font-family: "Saira Extra Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   text-transform: uppercase;
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .player-text-2 {
@@ -11429,6 +11429,26 @@ p.lead {
   text-transform: uppercase;
   font-weight: 500;
   font-size: 1rem;
+}
+
+.QB {
+  color: red;
+}
+
+.WR {
+  color: blue;
+}
+
+.RB {
+  color: green;
+}
+
+.TE {
+  color: #c20ac2;
+}
+
+.HighVorp {
+  font-weight: bold;
 }
 
 section.resume-section {

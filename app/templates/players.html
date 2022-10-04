@@ -9,8 +9,9 @@
         </h1>                    
             <div class="subheading mb-5">
                 Easily The Best Fantasy Draft App That Pop Acta's Ever Made<br />
-                Currently Drafting is Team : {{ DraftStatus.CurrentTeam }} <a href="{{ '/resetdraft' }}">  Current Draft Direction is {{ DraftStatus.DraftDirection }}<br />
-                <b>Reset Draft</b></a><br />
+                <!-- Currently Drafting is Team : {{ DraftStatus.CurrentTeam }} Current Draft Direction is {{ DraftStatus.DraftDirection }}<br /> -->
+                <a href="{{ '/resetdraft' }}"><b>Reset Draft</b></a><br />
+                QB: {{ DraftStatus.RemainingStarters()[0] }} RB: {{ DraftStatus.RemainingStarters()[1] }} WR: {{ DraftStatus.RemainingStarters()[2] }} TE: {{ DraftStatus.RemainingStarters()[3] }}               
                 
                 <!-- <a href="mailto:name@email.com">name@email.com</a> -->
             </div>        
@@ -19,22 +20,57 @@
                     <div class="col-2">
                         <div class="player-text-1">
                             <b>Undrafted Players</b><br />
-                            {% for player in UndraftedPlayers %}
+                            {% for player in UndraftedPlayers1 %}
                             
-                            <a href="{{ '/updateplayerownership/%i' %player.id }}">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points - <i>{{ player.Vorp() }}</i> VORP</a><br />
+                            <a href="{{ '/updateplayerownership/%i' %player.id }}"><span {% if player.position == 'QB' %} class="QB" 
+                                                                                         {% elif player.position == 'RB' %} class="RB" 
+                                                                                         {% elif player.position == 'WR' %} class="WR"
+                                                                                         {% elif player.position == 'TE' %} class="TE"
+                                                                                         {% endif %}>{{ player.playername }} | {{ player.position }}-{{ player.team }}</span> | Tier/Rank <b>{{ player.tier }}</b>-{{ player.draftrank }} | <i>{{ player.pointprojection }}</i> points |
+                            {% if player.Vorp() > 50 %}<span class="HighVorp"> {% endif %}{% if player.Vorp() > 70 %}<span class="QB"> {% endif %} {{'%0.2f'| format(player.Vorp()|float)}} VORP </span></span></a><br />                                                                                                                   
                                         
                             {% endfor %}  
                         </div>
                         
-                    </div>            
+                    </div>          
+                    <div class="col-2">
+                        <div class="player-text-1">
+                            <b>Undrafted Players</b><br />
+                            {% for player in UndraftedPlayers2 %}
+                            
+                            <a href="{{ '/updateplayerownership/%i' %player.id }}"><span {% if player.position == 'QB' %} class="QB" 
+                                                                                         {% elif player.position == 'RB' %} class="RB" 
+                                                                                         {% elif player.position == 'WR' %} class="WR"
+                                                                                         {% elif player.position == 'TE' %} class="TE"
+                                                                                         {% endif %}>{{ player.playername }} | {{ player.position }}-{{ player.team }}</span> | Tier/Rank <b>{{ player.tier }}</b>-{{ player.draftrank }} | <i>{{ player.pointprojection }}</i> points | 
+                                                                                         {% if player.Vorp() > 50 %}<span class="HighVorp"> {% endif %}{% if player.Vorp() > 70 %}<span class="QB"> {% endif %} {{'%0.2f'| format(player.Vorp()|float)}} VORP </span></span></a><br />
+
+                            {% endfor %}  
+                        </div>
+                        
+                    </div>        
                     <div class="col-2">
                         <div class="player-text-1"> 
                             <b>Drafted Players</b><br />
                             {% for player in DraftedPlayers %}
                             
-                            <a href="{{ '/updateplayerownership/%i' %player.id }}">{{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.Vorp() }}</i> VORP</a><br />
-                                        
+                            <a href="{{ '/updateplayerownership/%i' %player.id }}"><span {% if player.position == 'QB' %} class="QB" 
+                                                                                         {% elif player.position == 'RB' %} class="RB" 
+                                                                                         {% elif player.position == 'WR' %} class="WR"
+                                                                                         {% elif player.position == 'TE' %} class="TE"
+                                                                                         {% endif %}>{{ player.playername }} | {{ player.position }}-{{ player.team }}</span> | Tier/Rank <b>{{ player.tier }}</b>-{{ player.draftrank }} | <i>{{ player.pointprojection }}</i> points | 
+                                                                                         {% if player.Vorp() > 50 %}<span class="HighVorp"> {% endif %}{% if player.Vorp() > 70 %}<span class="QB"> {% endif %} {{'%0.2f'| format(player.Vorp()|float)}} VORP </span></span></a><br />
                             {% endfor %}  
+                        </div>
+                                        
+                    </div>
+                    <div class="col-2">
+                        <div class="player-text-1"> 
+                            <b>Positional VORP</b><br />
+                            QB = {{ QBVorp[0].playername }}, {{ QBVorp[1].playername }} {{'%0.2f'| format((QBVorp[0].pointprojection - QBVorp[1].pointprojection)|float) }}, {{ QBVorp[2].playername }} {{'%0.2f'| format((QBVorp[0].pointprojection - QBVorp[2].pointprojection)|float) }} <br />
+                            RB = {{ RBVorp[0].playername }}, {{ RBVorp[1].playername }} {{'%0.2f'| format((RBVorp[0].pointprojection - RBVorp[1].pointprojection)|float) }}, {{ RBVorp[2].playername }} {{'%0.2f'| format((RBVorp[0].pointprojection - RBVorp[2].pointprojection)|float) }} <br />
+                            WR = {{ WRVorp[0].playername }}, {{ WRVorp[1].playername }} {{'%0.2f'| format((WRVorp[0].pointprojection - WRVorp[1].pointprojection)|float) }}, {{ WRVorp[2].playername }} {{'%0.2f'| format((WRVorp[0].pointprojection - WRVorp[2].pointprojection)|float) }} <br />
+                            TE = {{ TEVorp[0].playername }}, {{ TEVorp[1].playername }} {{'%0.2f'| format((TEVorp[0].pointprojection - TEVorp[1].pointprojection)|float) }}, {{ TEVorp[2].playername }} {{'%0.2f'| format((TEVorp[0].pointprojection - TEVorp[2].pointprojection)|float) }} <br />
                         </div>
                                         
                     </div>
@@ -42,14 +78,14 @@
             </div>
             <br /><br /><br /><br />
             
-            <div class="player-lists">
+            <!-- <div class="player-lists">
                 
                 <div class="col-1">
                     <div class="player-text-2">
                         <b>Team 1</b><br />
                         {% for player in PlayersTeam1 %}
                         
-                        {{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
+                        {{ player.playername }} | {{ player.position }}-{{ player.team }} | {{ player.draftrank }}-{{ player.vorpatdraft }} R/V<br />
                                     
                         {% endfor %}  
                     </div>
@@ -60,7 +96,7 @@
                         <b>Team 2</b><br />
                         {% for player in PlayersTeam2 %}
                         
-                        {{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
+                        {{ player.playername }} | {{ player.position }}-{{ player.team }} | {{ player.draftrank }}-{{ player.vorpatdraft }} R/V<br />
                                     
                         {% endfor %}  
                     </div>
@@ -71,7 +107,7 @@
                         <b>Team 3</b><br />
                         {% for player in PlayersTeam3 %}
                         
-                        {{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
+                        {{ player.playername }} | {{ player.position }}-{{ player.team }} | {{ player.draftrank }}-{{ player.vorpatdraft }} R/V<br />
                                     
                         {% endfor %}  
                     </div>
@@ -82,12 +118,12 @@
                         <b>Team 4</b><br />
                         {% for player in PlayersTeam4 %}
                         
-                        {{ player.playername }} | <b>{{ player.position }}</b> - <i>{{ player.value }}</i> points.</a><br />
+                        {{ player.playername }} | {{ player.position }}-{{ player.team }} | {{ player.draftrank }}-{{ player.vorpatdraft }} R/V<br />
                                     
                         {% endfor %}  
                     </div>
                                     
-                </div>
+                </div> -->
             
         </div>
         
